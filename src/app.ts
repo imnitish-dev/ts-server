@@ -10,7 +10,9 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import { connect } from '@database';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
-
+import { name,version,description } from '../package.json';
+import swaggerJSDoc from 'swagger-jsdoc';
+import swaggerUi from 'swagger-ui-express';
 class App {
   public app: express.Application;
   public port: number;
@@ -26,9 +28,12 @@ class App {
 
     this.connectToDatabase();
     logger.info('Database connected');
-    
+
     this.initializeErrorHandling();
     logger.info('Error handling initialized');
+
+    this.initializeSwagger();
+    logger.info('Swagger initialized');
   }
 
   private initializeMiddlewares() {
@@ -45,9 +50,24 @@ class App {
   private async connectToDatabase() {
     await connect();
   }
-  
+
   private initializeErrorHandling() {
     this.app.use(ErrorMiddleware);
+  }
+  private initializeSwagger() {
+    const options = {
+      swaggerDefinition: {
+        info: {
+          title: name,
+          version: version,
+          description: description,
+        },
+      },
+      apis: ['swagger.yaml'],
+    };
+
+    const specs = swaggerJSDoc(options);
+    this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
   }
 
   public listen() {

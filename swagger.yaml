@@ -1,0 +1,44 @@
+
+tags:
+  - name: system
+    description: System operations
+paths:
+  /system/health:
+    get:
+      tags:
+        - system
+      summary: Get system health
+      description: Get system health
+      operationId: getSystemHealth
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/Health'
+        '500':
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/Error'
+            
+definitions:
+  Health:
+    type: object
+    properties:
+      status:
+        type: string
+        description: System status
+      version:
+        type: string
+        description: System version
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+        description: Error code
+      message:
+        type: string
+        description: Error message
+  
+            
