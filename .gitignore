@@ -130,6 +130,6 @@ dist
 .pnp.*
 
 
-LOG
-LOG/
-LOG/*
+log
+log/
+log/*
