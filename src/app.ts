@@ -6,6 +6,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
+import hpp from 'hpp';
 
 class App {
   public app: express.Application;
@@ -18,6 +20,7 @@ class App {
     this.env = NODE_ENV || 'development';
 
     this.initializeMiddlewares();
+    logger.info('Middlewares initialized');
   }
 
   private initializeMiddlewares() {
@@ -27,6 +30,8 @@ class App {
     this.app.use(cookieParser());
     this.app.use(cors({ origin: ORIGIN, credentials: CREDENTIALS }));
     this.app.use(morgan(LOG_FORMAT, { stream }));
+    this.app.use(hpp());
+    this.app.use(helmet());
   }
 
   public listen() {
