@@ -8,6 +8,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import hpp from 'hpp';
+import { connect } from '@database';
 
 class App {
   public app: express.Application;
@@ -21,6 +22,8 @@ class App {
 
     this.initializeMiddlewares();
     logger.info('Middlewares initialized');
+    this.connectToDatabase();
+    logger.info('Database connected');
   }
 
   private initializeMiddlewares() {
@@ -32,6 +35,10 @@ class App {
     this.app.use(morgan(LOG_FORMAT, { stream }));
     this.app.use(hpp());
     this.app.use(helmet());
+  }
+
+  private async connectToDatabase() {
+    await connect();
   }
 
   public listen() {
