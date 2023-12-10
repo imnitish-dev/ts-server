@@ -14,14 +14,6 @@ export class UserRoute implements Routes {
 
   private initializeRoutes() {
     this.router.get(`${this.path}`, async (_req, res) => {
-      const data: IUser = {
-        username: 'Nitish',
-        email: 'nitish@fjfj.com',
-        password: '123456',
-      };
-
-      const newUser = await userService.create(data);
-      console.log(newUser?.toJSON());
       const user = await userService.getAll(
         {
           email: 'Nitish',
