@@ -10,9 +10,11 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import { connect } from '@database';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
-import { name,version,description } from '@/../package.json';
+import { name, version, description } from '@/../package.json';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
+import routes, { Routes } from './routes';
+
 class App {
   public app: express.Application;
   public port: number;
@@ -34,6 +36,9 @@ class App {
 
     this.initializeSwagger();
     logger.info('Swagger initialized');
+
+    this.initializeRoutes([routes]); // Fix: Wrap routes in an array
+    logger.info('Routes initialized');
   }
 
   private initializeMiddlewares() {
@@ -68,6 +73,12 @@ class App {
 
     const specs = swaggerJSDoc(options);
     this.app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+  }
+
+  private initializeRoutes(routes: Routes[]) {
+    routes.forEach((route) => {
+      this.app.use('/', route.router);
+    });
   }
 
   public listen() {
