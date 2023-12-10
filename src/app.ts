@@ -10,7 +10,7 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import { connect } from '@database';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
-import { name,version,description } from '../package.json';
+import { name,version,description } from '@/../package.json';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 class App {
