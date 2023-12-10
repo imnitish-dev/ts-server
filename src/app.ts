@@ -10,9 +10,9 @@ class App {
   public port: number;
   public env: string;
 
-  constructor(port: number) {
+  constructor() {
     this.app = express();
-    this.port = port;
+    this.port = parseInt(PORT) || 3000;
     this.env = NODE_ENV || 'development';
 
     this.initializeMiddlewares();
