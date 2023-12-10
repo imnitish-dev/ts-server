@@ -12,7 +12,11 @@ if (!existsSync(logDir)) {
 }
 
 // Define log format
-const logFormat = winston.format.printf(({ timestamp, level, message }) => `${timestamp} ${level}: ${message}`);
+const logFormat = winston.format.printf(({ timestamp, level, message }) =>
+  message.length > 1000
+    ? `[ ${timestamp} ] ${level} => ${message.substring(0, 1000)}...`
+    : `[ ${timestamp} ] ${level} => ${message}`
+);
 
 /*
  * Log Level
