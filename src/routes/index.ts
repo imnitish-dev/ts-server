@@ -1,22 +1,21 @@
 import { Router } from 'express';
+import { AuthRoute } from '@/routes/auth.route';
+import { UserRoute } from '@/routes/users.route';
+import { Routes } from '@/interfaces/routes';
 
-export interface Routes {
-  path?: string;
-  router: Router;
-}
-
-class IndexRoute implements Routes {
+const routes: Routes[] = [new AuthRoute('/auth'), new UserRoute('/users')];
+class Route {
   public router = Router();
 
   constructor() {
-    this.initializeRoutes();
+    this.initializeRoutes(routes);
   }
 
-  private initializeRoutes() {
-    this.router.get('/', (req, res) => {
-      res.send('hello');
+  private initializeRoutes(routes: Routes[]) {
+    routes.forEach((route) => {
+      this.router.use('/', route.router);
     });
   }
 }
-
-export default new IndexRoute();
+export const myRoute = new Route();
+export default routes;
