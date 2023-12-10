@@ -9,6 +9,7 @@ import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import hpp from 'hpp';
 import { connect } from '@database';
+import { ErrorMiddleware } from '@middlewares/error.middleware';
 
 class App {
   public app: express.Application;
@@ -22,8 +23,12 @@ class App {
 
     this.initializeMiddlewares();
     logger.info('Middlewares initialized');
+
     this.connectToDatabase();
     logger.info('Database connected');
+    
+    this.initializeErrorHandling();
+    logger.info('Error handling initialized');
   }
 
   private initializeMiddlewares() {
@@ -39,6 +44,10 @@ class App {
 
   private async connectToDatabase() {
     await connect();
+  }
+  
+  private initializeErrorHandling() {
+    this.app.use(ErrorMiddleware);
   }
 
   public listen() {
