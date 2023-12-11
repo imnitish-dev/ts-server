@@ -7,10 +7,7 @@ export type User = BaseModel & {
   password: string;
 };
 
-export type UserDocument = User & Document;
-
-
-export const userSchema = new Schema<UserDocument>({
+const userSchema = new Schema<User & Document>({
   username: {
     type: String,
     required: true,
