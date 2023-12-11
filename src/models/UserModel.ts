@@ -1,12 +1,14 @@
-import mongoose, { Document, Model, Schema } from 'mongoose';
-import { IBaseDocument } from '@models/BaseModel';
+import mongoose, { Document, Model, Schema, Types } from 'mongoose';
+import { BaseModel } from '@models/BaseModel';
 
-export interface IUser extends IBaseDocument {
+export type User = BaseModel & {
   username: string;
   email: string;
   password: string;
-}
-interface UserDocument extends IUser, Document {}
+};
+
+export type UserDocument = User & Document;
+
 
 export const userSchema = new Schema<UserDocument>({
   username: {
