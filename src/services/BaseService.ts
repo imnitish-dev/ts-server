@@ -7,73 +7,63 @@ export class BaseServices<M extends Document, Q> {
     return this.model.countDocuments(query).exec();
   }
 
-  async getAll(
-    filter?: mongoose.FilterQuery<Q>,
-    { limit = 5, projection = {}, skip = 0 }: any = {}
-  ): Promise<Require_id<FlattenMaps<M>>[]> {
+  async getAll(filter?: mongoose.FilterQuery<Q>, { limit = 5, projection = {}, skip = 0 }: any = {}): Promise<Q[]> {
     return this.model
       .find(filter)
       .select(Object.assign({}, projection, { __v: false }) as Record<string, number | boolean | object>)
       .skip(skip as number)
       .limit(limit as number)
       .lean()
-      .exec();
+      .exec() as unknown as Q[];
   }
 
-  async create(data: Q): Promise<Require_id<FlattenMaps<M>>> {
-    return this.model.create(data) as Promise<Require_id<FlattenMaps<M>>>;
+  async create(data: Q): Promise<Q> {
+    return this.model.create(data) as unknown as Q;
   }
 
-  async updateOne(
-    id: mongoose.Types.ObjectId,
-    data: Partial<Q>,
-    options?: mongoose.QueryOptions
-  ): Promise<Require_id<FlattenMaps<M>> | null> {
+  async updateOne(id: mongoose.Types.ObjectId, data: Partial<Q>, options?: mongoose.QueryOptions): Promise<Q | null> {
     return this.model
       .findByIdAndUpdate(id, data as UpdateQuery<M>, options)
       .lean()
-      .exec() as Promise<Require_id<FlattenMaps<M>> | null>;
+      .exec() as Promise<Q | null>;
   }
 
-  async deleteOne(id: mongoose.Types.ObjectId): Promise<Require_id<FlattenMaps<M>> | null> {
-    return this.model.findByIdAndDelete(id).lean().exec() as Promise<Require_id<FlattenMaps<M>> | null>;
+  async deleteOne(id: mongoose.Types.ObjectId): Promise<Q | null> {
+    return this.model.findByIdAndDelete(id).lean().exec() as Promise<Q | null>;
   }
 
-  async findOne(
-    filter: mongoose.FilterQuery<Q>,
-    projection?: mongoose.ProjectionFields<Q>
-  ): Promise<Require_id<FlattenMaps<M>> | null> {
+  async findOne(filter: mongoose.FilterQuery<Q>, projection?: mongoose.ProjectionFields<Q>): Promise<Q | null> {
     return this.model
       .findOne(filter)
       .select(Object.assign({}, projection, { __v: false }) as Record<string, number | boolean | object>)
       .lean()
-      .exec() as Promise<Require_id<FlattenMaps<M>> | null>;
+      .exec() as Promise<Q | null>;
   }
 
   async findOneAndUpdate(
     filter: mongoose.FilterQuery<Q>,
     data: Partial<Q>,
     options?: mongoose.QueryOptions
-  ): Promise<Require_id<FlattenMaps<M>> | null> {
+  ): Promise<Q | null> {
     return this.model
       .findOneAndUpdate(filter, data as UpdateQuery<M>, options)
       .lean()
-      .exec() as Promise<Require_id<FlattenMaps<M>> | null>;
+      .exec() as Promise<Q | null>;
   }
 
-  async findById(id: mongoose.Types.ObjectId): Promise<Require_id<FlattenMaps<M>> | null> {
-    return this.model.findById(id).lean().exec() as Promise<Require_id<FlattenMaps<M>> | null>;
+  async findById(id: mongoose.Types.ObjectId): Promise<Q | null> {
+    return this.model.findById(id).lean().exec() as Promise<Q | null>;
   }
 
-  async aggregate(pipeline: any[]): Promise<Require_id<FlattenMaps<M>>[]> {
-    return this.model.aggregate(pipeline).exec() as Promise<Require_id<FlattenMaps<M>>[]>;
+  async aggregate(pipeline: any[]): Promise<Q[]> {
+    return this.model.aggregate(pipeline).exec() as Promise<Q[]>;
   }
 
-  async aggregatePaginate(pipeline: any[], { limit = 5, skip = 0 }: any = {}): Promise<Require_id<FlattenMaps<M>>[]> {
+  async aggregatePaginate(pipeline: any[], { limit = 5, skip = 0 }: any = {}): Promise<Q[]> {
     return this.model
       .aggregate(pipeline)
       .skip(skip as number)
       .limit(limit as number)
-      .exec() as Promise<Require_id<FlattenMaps<M>>[]>;
+      .exec() as Promise<Q[]>;
   }
 }
