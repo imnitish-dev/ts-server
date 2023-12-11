@@ -84,7 +84,8 @@ class App {
 
   public listen() {
     this.app.listen(this.port, () => {
-      logger.info(`
+      if (this.env === 'development') {
+        logger.info(`
       .-----------------------------------.
       |                                   |
       |                                   |
@@ -94,6 +95,7 @@ class App {
       |                                   |
       |___________________________________|
       `);
+      }
     });
   }
 }
