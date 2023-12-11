@@ -28,6 +28,7 @@
       "@dtos/*": ["dtos/*"],
       "@exceptions/*": ["exceptions/*"],
       "@interfaces/*": ["interfaces/*"],
+      "@types/*": ["types/*"],
       "@middlewares/*": ["middlewares/*"],
       "@models/*": ["models/*"],
       "@routes/*": ["routes/*"],
