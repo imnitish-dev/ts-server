@@ -2,7 +2,7 @@ import { Routes } from '@/types/routes';
 import { Router } from 'express';
 
 export class AuthRoute implements Routes {
-  public path:string;
+  public path: string;
   public router = Router();
 
   constructor(path: string) {

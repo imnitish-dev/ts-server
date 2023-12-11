@@ -1,4 +1,4 @@
-import mongoose, { Document, FlattenMaps, Model, Require_id, UpdateQuery } from 'mongoose';
+import mongoose, { Document, Model, UpdateQuery } from 'mongoose';
 
 export class BaseServices<M extends Document, Q> {
   constructor(protected model: Model<M>) {}
@@ -40,11 +40,7 @@ export class BaseServices<M extends Document, Q> {
       .exec() as Promise<Q | null>;
   }
 
-  async findOneAndUpdate(
-    filter: mongoose.FilterQuery<Q>,
-    data: Partial<Q>,
-    options?: mongoose.QueryOptions
-  ): Promise<Q | null> {
+  async findOneAndUpdate(filter: mongoose.FilterQuery<Q>, data: Partial<Q>, options?: mongoose.QueryOptions): Promise<Q | null> {
     return this.model
       .findOneAndUpdate(filter, data as UpdateQuery<M>, options)
       .lean()

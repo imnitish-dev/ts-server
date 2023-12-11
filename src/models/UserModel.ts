@@ -1,4 +1,4 @@
-import mongoose, { Document, Model, Schema, Types } from 'mongoose';
+import mongoose, { Document, Model, Schema } from 'mongoose';
 import { BaseModel } from '@models/BaseModel';
 
 export type User = BaseModel & {

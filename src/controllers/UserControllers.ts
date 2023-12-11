@@ -1,8 +1,8 @@
-import { NextFunction, Request, Response } from 'express';
+import { Request, Response } from 'express';
 import userService from '@/services/UserService';
 
 class UserController {
-  public getUsers = async (req: Request, res: Response, next: NextFunction) => {
+  public getUsers = async (req: Request, res: Response) => {
     const user = await userService.getAll(
       {
         email: {
@@ -14,9 +14,9 @@ class UserController {
         projection: {
           _id: false,
         },
-      }
+      },
     );
-    user.forEach((user) => {
+    user.forEach(user => {
       console.log(user?._id);
     });
     res.send(user);
