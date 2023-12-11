@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { AuthRoute } from '@/routes/auth.route';
 import { UserRoute } from '@/routes/users.route';
-import { Routes } from '@/interfaces/routes';
+import { Routes } from '@/types/routes';
 
 const routes: Routes[] = [new AuthRoute('/auth'), new UserRoute('/users')];
 class Route {

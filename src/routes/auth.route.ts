@@ -1,4 +1,4 @@
-import { Routes } from '@/interfaces/routes';
+import { Routes } from '@/types/routes';
 import { Router } from 'express';
 
 export class AuthRoute implements Routes {
