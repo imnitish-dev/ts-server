@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { Routes } from '@/interfaces/routes';
-import userService from '@/services/UserService';
-import { IUser } from '@/models/UserModel';
+import UserControllers from '@/controllers/UserControllers';
 
 export class UserRoute implements Routes {
   public path: string;
@@ -13,18 +12,6 @@ export class UserRoute implements Routes {
   }
 
   private initializeRoutes() {
-    this.router.get(`${this.path}`, async (_req, res) => {
-      const user = await userService.getAll(
-        {
-          email: 'Nitish',
-        },
-        {
-          projection: {
-            _id: false,
-          },
-        }
-      );
-      res.send(user);
-    });
+    this.router.get(`${this.path}`, UserControllers.getUsers);
   }
 }
