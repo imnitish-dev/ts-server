@@ -15,7 +15,7 @@ import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { name, version, description } from '@/../package.json';
 import { logger, stream } from '@utils/logger';
 import routes from '@/routes/index';
-import { Routes } from '@/interfaces/routes';
+import { Routes } from '@/types/routes';
 
 class App {
   public app: express.Application;
