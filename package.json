@@ -6,8 +6,12 @@
   "author": "Nitish",
   "main": "index.js",
   "module": "import",
-  "lint-staged": "lint-staged --config lint-staged.config.js",
-  "scripts": {
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint",
+      "git add"
+    ]
+  },  "scripts": {
     "precommit": "lint-staged",
     "commit": "npx git-cz",
     "dev": "cross-env NODE_ENV=development nodemon",
@@ -55,6 +59,8 @@
     "commitizen": "^4.3.0",
     "commitlint": "^18.4.3",
     "cross-env": "^7.0.3",
+    "cz-conventional-changelog": "^3.3.0",
+
     "eslint": "^8.55.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
