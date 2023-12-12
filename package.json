@@ -2,25 +2,26 @@
   "name": "ot-server",
   "version": "1.0.0",
   "description": "",
+  "license": "ISC",
+  "author": "Nitish",
   "main": "index.js",
+  "module": "import",
   "scripts": {
-    "prepare": "husky install",
     "precommit": "lint-staged",
     "commit": "npx git-cz",
     "dev": "cross-env NODE_ENV=development nodemon",
     "lint": "eslint --max-warnings=0  --ignore-path .gitignore --ext .ts src/",
-    "lint:fix": "npm run lint -- --fix"
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
-  "module": "import",
-  "author": "Nitish",
+  "lint-staged": "lint-staged --config lint-staged.config.js",
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
   },
-  "lint-staged": "lint-staged --config lint-staged.config.js",
-  "license": "ISC",
   "dependencies": {
+    "@typegoose/typegoose": "^12.0.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -45,7 +46,6 @@
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/hpp": "^0.2.5",
-    "@types/mongoose": "^5.11.97",
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.10.4",
     "@types/swagger-jsdoc": "^6.0.4",
@@ -59,7 +59,7 @@
     "eslint-plugin-prettier": "^5.0.1",
     "git-cz": "^4.9.0",
     "husky": "^8.0.3",
-    "lint-staged": "^15.2.0",
+    "lint-staged": "^15.0.1",
     "nodemon": "^3.0.2",
     "sort-package-json": "^2.6.0",
     "ts-node": "^10.9.2",
