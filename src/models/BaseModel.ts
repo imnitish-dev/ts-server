@@ -1,7 +1,13 @@
-import mongoose from 'mongoose';
+import { prop } from '@typegoose/typegoose';
+import { ObjectId } from 'mongoose';
 
-export type BaseModel = {
-  _id?: mongoose.Types.ObjectId;
-  createdAt?: Date;
-  updatedAt?: Date;
-};
+export class BaseModel {
+  @prop()
+  public _id!: ObjectId;
+
+  @prop()
+  public createdAt: Date;
+
+  @prop()
+  public updatedAt: Date;
+}

@@ -1,26 +1,16 @@
-import mongoose, { Document, Model, Schema } from 'mongoose';
-import { BaseModel } from '@models/BaseModel';
+import { prop, buildSchema } from '@typegoose/typegoose';
+import mongoose, { Document, Model } from 'mongoose';
+import { BaseModel } from './BaseModel';
 
-export type User = BaseModel & {
-  username: string;
-  email: string;
-  password: string;
-};
+export class User extends BaseModel {
+  @prop()
+  public username: string;
 
-const userSchema = new Schema<User & Document>({
-  username: {
-    type: String,
-    required: true,
-  },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
-});
+  @prop()
+  public email: string;
 
-export default mongoose.model<Document>('User', userSchema) as Model<Document>;
+  @prop()
+  public password: string;
+}
+
+export default mongoose.model<Document>('User', buildSchema(User)) as Model<Document>;
