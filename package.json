@@ -6,6 +6,7 @@
   "author": "Nitish",
   "main": "index.js",
   "module": "import",
+  "lint-staged": "lint-staged --config lint-staged.config.js",
   "scripts": {
     "precommit": "lint-staged",
     "commit": "npx git-cz",
@@ -13,12 +14,6 @@
     "lint": "eslint --max-warnings=0  --ignore-path .gitignore --ext .ts src/",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "npm run lint",
-      "git add"
-    ]
   },
   "config": {
     "commitizen": {
