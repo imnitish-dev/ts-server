@@ -18,7 +18,7 @@ export class BaseServices<M extends Document, Q> {
   }
 
   async create(data: Q): Promise<Q> {
-    return this.model.create(data) as unknown as Q;
+    return this.model.create(Object.assign({}, data, { _id: new mongoose.Types.ObjectId() })) as unknown as Q;
   }
 
   async updateOne(id: mongoose.Types.ObjectId, data: Partial<Q>, options?: mongoose.QueryOptions): Promise<Q | null> {
@@ -61,5 +61,8 @@ export class BaseServices<M extends Document, Q> {
       .skip(skip as number)
       .limit(limit as number)
       .exec() as Promise<Q[]>;
+  }
+  async deleteMany(filter: mongoose.FilterQuery<Q>): Promise<void> {
+    this.model.deleteMany(filter).lean().exec();
   }
 }
