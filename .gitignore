@@ -133,3 +133,5 @@ dist
 log
 log/
 log/*
+
+.data
