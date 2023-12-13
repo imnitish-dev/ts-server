@@ -3,11 +3,11 @@ import { ObjectId } from 'mongoose';
 
 export class BaseModel {
   @prop()
-  public _id!: ObjectId;
+  public _id?: ObjectId;
 
   @prop()
-  public createdAt: Date;
+  public createdAt?: Date;
 
   @prop()
-  public updatedAt: Date;
+  public updatedAt?: Date;
 }
