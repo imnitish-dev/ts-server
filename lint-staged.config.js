@@ -1,5 +1,5 @@
 module.exports = {
-  // 'package.json': ['sort-package-json'],
+  'package.json': ['sort-package-json'],
   '*.{ts,tsx}': ['npm run lint'],
-  // '**/*.ts?(x)': () => 'tsc -p tsconfig.json',
+  '**/*.ts?(x)': () => 'tsc -p tsconfig.json',
 };
