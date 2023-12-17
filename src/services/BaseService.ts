@@ -3,8 +3,13 @@ import mongoose, { Document, Model, UpdateQuery } from 'mongoose';
 export class BaseServices<M extends Document, Q> {
   constructor(protected model: Model<M>) {}
 
+  async count(query: mongoose.FilterQuery<Q>): Promise<number>;
+  async count(): Promise<number>;
   async count(query?: mongoose.FilterQuery<Q>): Promise<number> {
-    return this.model.countDocuments(query).exec();
+    if (query) {
+      return this.model.countDocuments(query).exec();
+    }
+    return this.model.countDocuments().exec();
   }
 
   async getAll(filter?: mongoose.FilterQuery<Q>, { limit = 5, projection = {}, skip = 0 }: any = {}): Promise<Q[]> {
