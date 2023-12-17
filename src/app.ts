@@ -9,7 +9,7 @@ import hpp from 'hpp';
 import swaggerJSDoc from 'swagger-jsdoc';
 import swaggerUi from 'swagger-ui-express';
 
-import { connect } from '@database';
+import { connectDB } from '@database';
 import { ErrorMiddleware } from '@middlewares/error.middleware';
 import { NODE_ENV, PORT, LOG_FORMAT, ORIGIN, CREDENTIALS } from '@config';
 import { name, version, description } from '@/../package.json';
@@ -54,7 +54,7 @@ class App {
   }
 
   private async connectToDatabase() {
-    await connect();
+    await connectDB();
   }
 
   private initializeErrorHandling() {
