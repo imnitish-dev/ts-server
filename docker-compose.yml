@@ -29,6 +29,7 @@ services:
       - mongo
     depends_on:
       - mongo
+      - redis
 
   mongo:
     container_name: mongo
@@ -41,6 +42,16 @@ services:
       DB_HOST: mongo
       DB_PORT: 27017
       DB_DATABASE: dev
+    networks:
+      - network-service
+      
+  redis:
+    container_name: redis
+    image: redis/redis-stack-server:latest
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./.data/redis:/data
     networks:
       - network-service
 

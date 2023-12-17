@@ -3,7 +3,7 @@ import mongoose, { ConnectOptions } from 'mongoose';
 import { NODE_ENV, DB_HOST, DB_PORT, DB_DATABASE, DB_URL } from '@config';
 import { logger } from '@/utils/logger';
 
-export const connect = async () => {
+export const connectDB = async () => {
   try {
     const mongoURI = DB_URL || `mongodb://${DB_HOST}:${DB_PORT}/${DB_DATABASE}`;
 
